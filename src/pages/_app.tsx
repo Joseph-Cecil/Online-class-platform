@@ -15,6 +15,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   console.log(preferredColorScheme)
   const [colorScheme, setColorScheme] = useState<ColorScheme>(preferredColorScheme);
   const toggleColorScheme = (value?: ColorScheme) =>
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
   return (

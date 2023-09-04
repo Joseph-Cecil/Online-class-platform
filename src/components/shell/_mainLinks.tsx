@@ -1,53 +1,49 @@
-import React from 'react';
-import {
-  IconGitPullRequest,
-  IconAlertCircle,
-  IconMessages,
-  IconDatabase,
-  IconPencil,
-  IconChartLine,
-} from '@tabler/icons-react';
-import { ThemeIcon, UnstyledButton, Group, Text } from '@mantine/core';
+import React from "react";
+import { IconLayoutDashboard, IconPencil } from "@tabler/icons-react";
+import { ThemeIcon, Group, Text } from "@mantine/core";
+import Link from "next/link";
 
-interface MainLinkProps {
-  icon: React.ReactNode;
-  color: string;
-  label: string;
-}
-
-function MainLink({ icon, color, label }: MainLinkProps) {
-  return (
-    <UnstyledButton
-      sx={(theme) => ({
-        display: 'block',
-        width: '100%',
-        padding: theme.spacing.xs,
-        borderRadius: theme.radius.sm,
-        color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-        },
-      })}
-    >
-      <Group>
-        <ThemeIcon color={color} variant="light">
-          {icon}
-        </ThemeIcon>
-
-        <Text size="sm">{label}</Text>
-      </Group>
-    </UnstyledButton>
-  );
-}
-
-const data = [
-  { icon: <IconPencil size="1rem" />, color: 'blue', label: 'Manage Courses' },
-  { icon: <IconChartLine size="1rem" />, color: 'teal', label: 'Analytics' },
+const links = [
+  {
+    icon: <IconLayoutDashboard size="1rem" />,
+    color: "red",
+    label: "Dashboard",
+    href: "/",
+  },
+  {
+    icon: <IconPencil size="1rem" />,
+    color: "blue",
+    label: "Manage Courses",
+    href: "./courses",
+  },
+  // { icon: <IconChartLine size="1rem" />, color: 'teal', label: 'Analytics' },
 ];
 
 export function MainLinks() {
-  const links = data.map((link) => <MainLink {...link} key={link.label} />);
-  return <div>{links}</div>;
+  return links.map((link) => (
+    <Link
+      href={link.href}
+      key={link.href}
+      // sx={(theme) => ({
+      //   display: 'block',
+      //   width: '100%',
+      //   padding: theme.spacing.xs,
+      //   borderRadius: theme.radius.sm,
+      //   color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+
+      //   '&:hover': {
+      //     backgroundColor:
+      //       theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      //   },
+      // })}
+    >
+      <Group>
+        <ThemeIcon color={link.color} variant="light">
+          {link.icon}
+        </ThemeIcon>
+
+        <Text size="sm">{link.label}</Text>
+      </Group>
+    </Link>
+  ));
 }
