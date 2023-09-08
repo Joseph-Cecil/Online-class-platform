@@ -1,5 +1,5 @@
 import AdminDashboardLayout from "~/components/layout/admin-dashboard-layout";
-import { Button, Flex, Grid, Modal, Stack, TextInput } from "@mantine/core";
+import { Button, Flex, Grid, Modal, Stack, TextInput, Textarea } from "@mantine/core";
 import { Card as MantineCard, Image, Text, Group } from "@mantine/core";
 import { type Course } from "@prisma/client";
 import { useDisclosure } from "@mantine/hooks";
@@ -63,7 +63,7 @@ export default function Courses() {
             await courses.refetch();
           })}
         >
-          <Stack mb="2mb">
+          <Stack>
             <TextInput
               withAsterisk
               required
@@ -72,8 +72,9 @@ export default function Courses() {
               {...createCourseForm.getInputProps("title")}
             />
 
-            <TextInput
+            <Textarea
               withAsterisk
+              minRows={5}
               required
               label="description"
               placeholder="Say something about your course here"
