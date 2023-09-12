@@ -5,6 +5,7 @@ import { type Course } from "@prisma/client";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import { api } from "~/utils/api";
+import Link from "next/link";
 export default function Courses() {
   function CourseCard({ course }: { course: Course }) {
     return (
@@ -28,13 +29,16 @@ export default function Courses() {
           {course.description}
         </Text>
 
-        <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+        <Button 
+        component={Link}
+        href={`/dashboard/courses/${course.id}`}
+        variant="light" color="blue" fullWidth mt="md" radius="md">
           Manage
         </Button>
       </MantineCard>
     );
   }
-  const courses= api.course.getCourse.useQuery();
+  const courses= api.course.getCourses.useQuery();
   const createCourseMutation = api.course.createCourse.useMutation();
 
   const [
